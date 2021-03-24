@@ -81,9 +81,15 @@ class SIUnitsConversion {
 		StringBuilder conv = new StringBuilder();
 		for (int i=0; i < units.length(); i++) {
 			char c = units.charAt(i);
+			boolean isOp = precedence.containsKey(c);
+			boolean lastChar = i+1 == units.length();
 
-			if (precedence.containsKey(c)) {
+			if (isOp || lastChar) {
+				if (lastChar && !isOp) {
+					tmp.append(c);
+				}
 				if (tmp.length() > 0) {
+					System.out.println("tmp is " + tmp);
 					String tmpStr = tmp.toString();
 					SIUnit p;
 					if (siUnitNames.contains(tmpStr)) {
@@ -94,9 +100,14 @@ class SIUnitsConversion {
 						p = nameToSI.get(tmpStr);
 					}
 
+					System.out.println("name is ");
+					System.out.println(p.name);
 					conv.append(p.name);
 					vals.push(p.multiplicationFactor);
 				}
+			}
+
+			if (isOp) {
 				conv.append(c);
 
 				tmp = new StringBuilder();
