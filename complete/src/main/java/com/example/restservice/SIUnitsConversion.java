@@ -89,7 +89,6 @@ class SIUnitsConversion {
 					tmp.append(c);
 				}
 				if (tmp.length() > 0) {
-					System.out.println("tmp is " + tmp);
 					String tmpStr = tmp.toString();
 					SIUnit p;
 					if (siUnitNames.contains(tmpStr)) {
@@ -100,8 +99,6 @@ class SIUnitsConversion {
 						p = nameToSI.get(tmpStr);
 					}
 
-					System.out.println("name is ");
-					System.out.println(p.name);
 					conv.append(p.name);
 					vals.push(p.multiplicationFactor);
 				}
